@@ -52,6 +52,7 @@ public class TestValidUser {
 		ordenado.verify(dataService).getSomeData(validUser, "where id=" + validId);
 	}
 
+
 	@Test
 	public void testStopRemoteSystemWithValidUserAndSystem() throws OperationNotSupportedException, SystemManagerException {
 		User validUser = new User("1","Ana","Lopez","Madrid",

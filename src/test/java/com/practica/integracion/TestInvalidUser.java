@@ -25,6 +25,8 @@ import static org.mockito.Mockito.when;
 	@ExtendWith(MockitoExtension.class)
 	public class TestInvalidUser {
 		// Crea una instancia de data service
+
+
 		@Mock
 		private GenericDAO dataService;
 		@Mock
@@ -163,7 +165,7 @@ import static org.mockito.Mockito.when;
 		}
 
 		@Test
-		public void testAddRemoteSystemValid() throws OperationNotSupportedException, SystemManagerException {
+		public void testAddRemoteSystemInvalid() throws OperationNotSupportedException, SystemManagerException {
 			User validUser = new User("1","Ana","Lopez","Madrid",
 					new ArrayList<>());
 			when(authdao.getAuthData(validUser.getId())).thenReturn(validUser);
