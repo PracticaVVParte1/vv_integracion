@@ -161,4 +161,28 @@ import static org.mockito.Mockito.when;
 			ordenado.verify(authdao).getAuthData(validUser.getId());
 			ordenado.verify(dataService).getSomeData(validUser, "where id=" + validId);
 		}
+
+		@Test
+		public void testAddRemoteSystemValid() throws OperationNotSupportedException, SystemManagerException {
+			User validUser = new User("1","Ana","Lopez","Madrid",
+					new ArrayList<>());
+			when(authdao.getAuthData(validUser.getId())).thenReturn(validUser);
+
+			String validId = "12345";
+			ArrayList<Object> lista = new ArrayList<>(Arrays.asList("3","4"));
+			when(dataService.updateSomeData(validUser,lista)).thenReturn(true);
+
+			// Se ejecuta la llmada al authdao
+			// ahora se ejecuta el dao a acceso a datos del sistema
+			InOrder ordenado = inOrder(authdao, dataService);
+			// se instancia el manager con los mock creados
+			SystemManager manager = new SystemManager(authdao, dataService);
+			// Se llama a la api que queremos probar, en este caso SystemManager
+			manager.addRemoteSystem("2",lista);
+			// assertEquals(retorno.toString(), "[uno, dos]");
+			// Comprobar que las llamadas a las dao se ejecutan y perimero la de autenticación y luego
+			// la de acceso a datos
+			ordenado.verify(authdao).getAuthData(validUser.getId());
+			ordenado.verify(dataService).updateSomeData(validUser,lista);
+		}
 }
