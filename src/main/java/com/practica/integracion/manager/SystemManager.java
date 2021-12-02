@@ -61,6 +61,7 @@ public class SystemManager {
 
 	public void deleteRemoteSystem(String userId, String remoteId) throws SystemManagerException {		
 		final User auth = new User("1", "Antonio", "Perez", "Madrid", new ArrayList<Object>());
+		//final User auth = authDao.getAuthData(userId); si esta linea se cambiara por la de arriba la funcion estaría arreglada
 		boolean isDeleted = true;
 		try {
 			isDeleted = dao.deleteSomeData(auth, remoteId);
